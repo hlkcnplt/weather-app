@@ -8,7 +8,7 @@ export const fetchWeather = async (city) => {
   if (WEATHER_API_KEY) {
     try {
       const q = encodeURIComponent(city);
-      const url = `https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${q}&days=1&aqi=no&alerts=no`;
+      const url = `https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${q}&days=7&aqi=no&alerts=no`;
       const res = await axios.get(url);
       return res.data;
     } catch (err) {
