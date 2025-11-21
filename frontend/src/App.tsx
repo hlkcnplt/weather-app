@@ -5,14 +5,35 @@ import HourForecast from "./components/HourForecast";
 
 const App = () => {
   return (
-    <div className='h-screen mx-10 flex flex-col items-center justify-center'>
-      <div className='h-full w-full m-10 bg-base-300 rounded-xl flex flex-col justify-between items-center p-20 gap-10'>
-        <SearchBar />
-        <div className='w-full flex flex-row justify-between items-center'>
-          <CurrentWeather />
-          <DayForecast />
+    <div className="min-h-screen w-full flex items-center justify-center p-4 md:p-8">
+      <div className="w-full max-w-6xl bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10 flex flex-col gap-8">
+        
+        {/* Header Section */}
+        <div className="w-full">
+          <SearchBar />
         </div>
-        <HourForecast />
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full h-full">
+          
+          {/* Left Column: Current Weather & Hourly Forecast */}
+          <div className="lg:col-span-2 flex flex-col gap-8">
+            <div className="flex-1 min-h-[300px] bg-black/20 rounded-2xl p-6 border border-white/5">
+              <CurrentWeather />
+            </div>
+            <div className="h-auto bg-black/20 rounded-2xl p-6 border border-white/5">
+              <HourForecast />
+            </div>
+          </div>
+
+          {/* Right Column: 3-Day Forecast */}
+          <div className="lg:col-span-1 h-full">
+             <div className="h-full bg-black/20 rounded-2xl p-6 border border-white/5">
+              <DayForecast />
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   );
