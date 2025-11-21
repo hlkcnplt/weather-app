@@ -4,11 +4,14 @@ import cors from "cors";
 import redisClient from "./config/redis.js";
 import apiRoutes from "./routes/api.js";
 import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
-const __dirname = path.resolve();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 redisClient
   .connect()
@@ -28,12 +31,19 @@ app.get("/api/status", (req, res) => {
 
 app.use("/api", apiRoutes);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+console.log("Current NODE_ENV:", process.env.NODE_ENV);
 
-  app.get(/.*/, (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+if (process.env.NODE_ENV === "production") {
+  const frontendPath = path.join(__dirname, "../../frontend/dist");
+  console.log("Serving static files from:", frontendPath);
+
+  app.use(express.static(frontendPath));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(frontendPath, "index.html"));
   });
+} else {
+  console.log("Running in development mode (or NODE_ENV not set to production)");
 }
 
 app.listen(PORT, () => {
