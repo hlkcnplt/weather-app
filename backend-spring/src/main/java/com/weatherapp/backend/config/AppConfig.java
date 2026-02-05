@@ -22,7 +22,6 @@ public class AppConfig {
     @Bean
     @Primary
     public ObjectMapper objectMapper() {
-        // Fix for standard serialization issues if any
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);

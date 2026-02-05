@@ -32,7 +32,7 @@ public class WeatherService implements IWeatherService {
     public CompletableFuture<ServiceResult> getWeatherForCityAsync(String city) {
         String cacheKey = "weather:current:" + city.toLowerCase();
 
-        // 1. Try Cache
+
         try {
             String cachedData = redisTemplate.opsForValue().get(cacheKey);
             if (cachedData != null) {
@@ -43,7 +43,7 @@ public class WeatherService implements IWeatherService {
             System.err.println("Redis read error: " + ex.getMessage());
         }
 
-        // 2. Fetch from API
+
         try {
             String url = String.format("%s/forecast.json?key=%s&q=%s&days=3", 
                 settings.getBaseUrl(), settings.getKey(), city);
@@ -53,7 +53,7 @@ public class WeatherService implements IWeatherService {
             String response = restTemplate.getForObject(url, String.class);
             
             if (response != null) {
-                // 3. Cache Result
+
                 try {
                     redisTemplate.opsForValue().set(cacheKey, response, 30, TimeUnit.MINUTES);
                 } catch (Exception ex) {

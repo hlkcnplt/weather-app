@@ -23,7 +23,7 @@ public class WeatherService : IWeatherService
     {
         string cacheKey = $"weather:current:{city.ToLower()}";
 
-        // 1. Try Cache
+
         if (_redis.IsConnected)
         {
             try
@@ -45,7 +45,7 @@ public class WeatherService : IWeatherService
             }
         }
 
-        // 2. Fetch from API
+
         try
         {
             var response = await _httpClient.GetAsync($"{_settings.BaseUrl}/forecast.json?key={_settings.ApiKey}&q={city}&days=3");
@@ -62,7 +62,7 @@ public class WeatherService : IWeatherService
             var content = await response.Content.ReadAsStringAsync();
             var jsonContent = JsonSerializer.Deserialize<JsonNode>(content);
 
-            // 3. Cache Result
+
             if (_redis.IsConnected)
             {
                 try

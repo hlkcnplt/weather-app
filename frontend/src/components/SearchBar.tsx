@@ -22,7 +22,7 @@ const SearchBar = () => {
           const { latitude, longitude } = pos.coords;
           try {
             const response = await fetch(
-              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=3&accept-language=en`
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=3&accept-language=en`,
             );
             const data = await response.json();
 
@@ -41,19 +41,19 @@ const SearchBar = () => {
               setCity(finalcityname);
             } else {
               console.warn(
-                "could not determine city name from coordinates. falling back to coordinate-based fetch."
+                "could not determine city name from coordinates. falling back to coordinate-based fetch.",
               );
             }
           } catch (error) {
             console.error(
               "Error during reverse geocoding or fetching weather: ",
-              error
+              error,
             );
           }
         },
         (err) => {
           console.error("Error getting location: ", err);
-        }
+        },
       );
     } else {
       console.error("Geolocation is not supported by this browser.");
@@ -64,8 +64,6 @@ const SearchBar = () => {
 
   return (
     <div className="w-full flex flex-col md:flex-row justify-between items-center gap-4">
-
-      {/* Search Input */}
       <form onSubmit={handleSubmit} className="relative w-full md:w-96 group">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-white transition-colors" />
         <input
@@ -77,10 +75,7 @@ const SearchBar = () => {
         />
       </form>
 
-      {/* Location & GPS */}
       <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
-
-        {/* Current Location Display */}
         <div className="flex items-center gap-2 text-white/90">
           <MapPin className="w-5 h-5 text-blue-400" />
           <span className="font-medium text-lg truncate max-w-[200px]">
@@ -90,7 +85,6 @@ const SearchBar = () => {
           </span>
         </div>
 
-        {/* GPS Button */}
         <button
           onClick={position}
           className="p-3 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 rounded-full transition-colors"

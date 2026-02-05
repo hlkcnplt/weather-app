@@ -25,7 +25,6 @@ const CurrentWeather = () => {
 
   return (
     <div className="relative h-full flex flex-col justify-between z-10">
-      {/* Top Section: Temp & Condition */}
       <div className="flex justify-between items-start">
         <div>
           <h1 className="text-6xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
@@ -43,7 +42,6 @@ const CurrentWeather = () => {
         />
       </div>
 
-      {/* Bottom Section: Details */}
       <div className="grid grid-cols-2 gap-3 mt-6">
         <div className="bg-white/5 rounded-xl p-3 flex items-center gap-3 border border-white/5 hover:bg-white/10 transition-colors">
           <div className="p-2 bg-blue-500/20 rounded-full text-blue-400">

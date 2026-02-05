@@ -1,7 +1,7 @@
 import redisClient from "../config/redis.js";
 import { fetchWeather } from "../services/weatherService.js";
 
-const TTL_SECONDS = 60 * 30; // 30 minutes
+const TTL_SECONDS = 60 * 30;
 
 const tryGetCache = async (key) => {
   try {
