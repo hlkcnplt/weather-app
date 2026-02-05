@@ -24,3 +24,24 @@ dist-ssr
 *.sw?
 
 .env
+.env.*
+
+# Java / Spring Boot
+target/
+.mvn/
+mvnw
+mvnw.cmd
+.classpath
+.project
+.settings/
+application.properties
+application.yml
+src/main/resources/application.properties
+
+# .NET / C#
+bin/
+obj/
+appsettings.json
+appsettings.Development.json
+*.user
+*.pdb
