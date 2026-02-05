@@ -22,30 +22,30 @@ const DayForecast = () => {
         <h3 className="font-semibold text-lg">3-Day Forecast</h3>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         {futureDays.map((day: any, index: number) => (
           <div
             key={day.date}
-            className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all duration-300"
+            className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all duration-300"
           >
             <div className="flex flex-col">
-              <span className="font-medium text-lg text-white">
+              <span className="font-medium text-base text-white">
                 {index === 0 ? "Today" : getDayName(day.date)}
               </span>
-              <span className="text-sm text-gray-400">{day.date}</span>
+              <span className="text-xs text-gray-400">{day.date}</span>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <img
                 src={day.day.condition.icon}
                 alt={day.day.condition.text}
-                className="w-10 h-10"
+                className="w-8 h-8"
               />
-              <div className="flex flex-col items-end min-w-[60px]">
-                <span className="text-xl font-bold text-white">
+              <div className="flex flex-col items-end min-w-[50px]">
+                <span className="text-lg font-bold text-white">
                   {Math.round(day.day.avgtemp_c)}°
                 </span>
-                <span className="text-xs text-gray-400">Avg Temp</span>
+                <span className="text-[10px] text-gray-400">Avg Temp</span>
               </div>
             </div>
           </div>

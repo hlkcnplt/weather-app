@@ -8,7 +8,7 @@ import { fileURLToPath } from "url";
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -43,7 +43,14 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(frontendPath, "index.html"));
   });
 } else {
-  console.log("Running in development mode (or NODE_ENV not set to production)");
+  console.log(
+    "Running in development mode (or NODE_ENV not set to production)",
+  );
+  app.get("/", (req, res) => {
+    res.send(
+      "API Server is running. Frontend is likely at <a href='http://localhost:5173'>http://localhost:5173</a>",
+    );
+  });
 }
 
 app.listen(PORT, () => {

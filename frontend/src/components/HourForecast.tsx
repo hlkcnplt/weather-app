@@ -17,24 +17,24 @@ const HourForecast = () => {
         <h3 className="font-semibold text-lg">Hourly Forecast</h3>
       </div>
 
-      <div className="flex-1 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
-        <div className="flex gap-4 min-w-min">
+      <div className="flex-1 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+        <div className="flex gap-3 min-w-min">
           {todayForecast.map((hour: any) => (
             <div
               key={hour.time}
-              className="flex flex-col items-center justify-between min-w-[100px] p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all duration-300 group"
+              className="flex flex-col items-center justify-between min-w-[80px] p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all duration-300 group"
             >
-              <p className="text-sm font-medium text-gray-400 group-hover:text-white transition-colors">
+              <p className="text-xs font-medium text-gray-400 group-hover:text-white transition-colors">
                 {hour.time.split(" ")[1]}
               </p>
 
               <img
                 src={hour.condition.icon}
                 alt={hour.condition.text}
-                className="w-12 h-12 my-2 drop-shadow-lg"
+                className="w-10 h-10 my-1 drop-shadow-lg"
               />
 
-              <p className="text-xl font-bold text-white">
+              <p className="text-lg font-bold text-white">
                 {Math.round(hour.temp_c)}°
               </p>
             </div>
