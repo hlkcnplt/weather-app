@@ -1,0 +1,69 @@
+services:
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - weather-network
+
+  # Node.js Backend (Default on 5001)
+  backend-node:
+    build: ./backend-node
+    ports:
+      - "5001:5001"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - WEATHER_API_KEY=${WEATHER_API_KEY}
+      - PORT=5001
+      - NODE_ENV=production
+    depends_on:
+      - redis
+    networks:
+      - weather-network
+
+  # Spring Boot Backend (Mapped to 5002)
+  backend-spring:
+    build: ./backend-spring
+    ports:
+      - "5002:5001"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - WEATHER_API_KEY=${WEATHER_API_KEY}
+      - PORT=5001
+    depends_on:
+      - redis
+    networks:
+      - weather-network
+
+  # .NET Backend (Mapped to 5003)
+  backend-dotnet:
+    build: ./backend-dotnet
+    ports:
+      - "5003:8080"
+    environment:
+      - ConnectionStrings__Redis=redis:6379
+      - WeatherApi__ApiKey=${WEATHER_API_KEY}
+      - ASPNETCORE_URLS=http://+:8080
+    depends_on:
+      - redis
+    networks:
+      - weather-network
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Defaulting to Node backend, user can change this build arg in .env or via command line
+        - VITE_API_URL=${VITE_API_URL:-http://localhost:5001/api/weather}
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend-node
+    networks:
+      - weather-network
+
+networks:
+  weather-network:
+    driver: bridge
