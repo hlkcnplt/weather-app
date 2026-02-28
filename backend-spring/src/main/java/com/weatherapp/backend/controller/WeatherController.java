@@ -1,6 +1,4 @@
 package com.weatherapp.backend.controller;
-
-import com.weatherapp.backend.model.ServiceResult;
 import com.weatherapp.backend.service.IWeatherService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

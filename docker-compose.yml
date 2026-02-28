@@ -37,20 +37,6 @@ services:
     networks:
       - weather-network
 
-  # .NET Backend (Mapped to 5003)
-  backend-dotnet:
-    build: ./backend-dotnet
-    ports:
-      - "5003:8080"
-    environment:
-      - ConnectionStrings__Redis=redis:6379
-      - WeatherApi__ApiKey=${WEATHER_API_KEY}
-      - ASPNETCORE_URLS=http://+:8080
-    depends_on:
-      - redis
-    networks:
-      - weather-network
-
   frontend:
     build:
       context: ./frontend
